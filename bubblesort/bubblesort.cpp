@@ -48,8 +48,7 @@ int main (int argc, char* argv[]) {
 
     int start = i%2;
 
-    #pragma omp parallel
-    for default(none) shared(arr, n, start)
+    #pragma omp parallel for default(none) shared(arr, n, start)
       for(int j=start; j<n-1; j+=2){
         if(arr[j]>arr[j+1]){
           swap(arr[j],arr[j+1]);
@@ -60,11 +59,9 @@ int main (int argc, char* argv[]) {
   }
   checkMergeSortResult (arr, n);
   delete[] arr;
-  
-  std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-  std::chrono::duration<double> elapsed_seconds = end-start;
-
-  std::cerr<<elapsed_seconds.count()<<std::endl;
+std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+std::chrono::duration<double> elapsed_seconds = end-start;
+std::cerr<<elapsed_seconds.count()<<std::endl;
 
   return 0;
 }
